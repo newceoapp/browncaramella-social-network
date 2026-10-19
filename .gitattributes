@@ -1,0 +1,9 @@
+# Normalize line endings across platforms (repo is developed on Windows).
+* text=auto
+
+# Images are binary.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
