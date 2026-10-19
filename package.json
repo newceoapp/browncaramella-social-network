@@ -1,0 +1,41 @@
+{
+  "name": "hackersdigest",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Front page for HackersDigest — an end-to-end encrypted social network for hackers.",
+  "scripts": {
+    "dev": "concurrently -n api,web -c green,cyan \"node server/index.js\" \"vite\"",
+    "dev:api": "node server/index.js",
+    "dev:web": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "npm run build && node server/index.js",
+    "db:init": "node server/create-db.js",
+    "smoke": "node scripts/smoke.mjs",
+    "smoke-auth": "node scripts/smoke-auth.mjs",
+    "smoke-admin": "node scripts/smoke-admin.mjs",
+    "smoke-feed": "node scripts/smoke-feed.mjs",
+    "smoke-account": "node scripts/smoke-account.mjs",
+    "smoke-rate-limit": "node scripts/smoke-rate-limit.mjs",
+    "smoke-contacts": "node scripts/smoke-contacts.mjs",
+    "shoot": "node scripts/shoot.mjs"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "pg": "^8.13.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.1.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.2",
+    "vite": "^6.0.7"
+  },
+  "allowScripts": {
+    "esbuild@0.25.12": true,
+    "@embedded-postgres/windows-x64@18.4.0-beta.17": true
+  }
+}

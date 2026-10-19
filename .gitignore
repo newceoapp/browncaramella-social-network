@@ -1,0 +1,11 @@
+node_modules/
+.env
+*.log
+
+# Production frontend bundle — committed so `npm start` serves it on Botkeep.
+# Rebuild with `npm run build` after source changes, then re-commit dist/.
+dist/
+
+# local dev/test artifacts
+.tmp-pgdata/
+shots/

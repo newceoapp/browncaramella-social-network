@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.env
+*.log
+.git/
+.gitignore
+shots/
+.tmp-pgdata/
+npm-debug.log*
+PHASE3.md
+DEPLOYMENT.md

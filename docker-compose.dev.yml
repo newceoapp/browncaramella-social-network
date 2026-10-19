@@ -1,0 +1,49 @@
+# HackersDigest — local development with Docker Compose
+#
+# Spins up the API + a PostgreSQL database. The frontend is served by the
+# API in production; for local frontend development use `npm run dev` instead
+# (Vite dev server with API proxy).
+#
+# Usage:
+#   docker compose -f docker-compose.dev.yml up --build
+#
+# Then open http://localhost:3001 (or the mapped port).
+
+services:
+  db:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: hackersdigest
+    ports:
+      - "5432:5432"
+    volumes:
+      - hackersdigest-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d hackersdigest"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@db:5432/hackersdigest
+      ADMIN_HANDLE: evobugz
+      SERVER_PORT: "3001"
+      NODE_ENV: development
+    ports:
+      - "3001:3001"
+    # In dev, mount source for live schema changes (the API reads db/schema.sql on boot)
+    volumes:
+      - ./server:/app/server
+      - ./db:/app/db
+
+volumes:
+  hackersdigest-db-data:
