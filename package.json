@@ -10,7 +10,7 @@
     "dev:web": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "npm run build && node server/index.js",
+    "start": "node server/index.js",
     "db:init": "node server/create-db.js",
     "smoke": "node scripts/smoke.mjs",
     "smoke-auth": "node scripts/smoke-auth.mjs",
